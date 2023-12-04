@@ -1,8 +1,3 @@
-# Takeways:
-# Sgreeek documentation for your purposes first and foremost
-# string methods such as lstrip()
-# Re for more complex string manipulation
-# Iterators and re.finditer
 import re
 
 with open("input2") as f:
