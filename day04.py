@@ -31,7 +31,7 @@ def getCards(lines, weights):
     return total_iterations
 
 
-with open("input2") as f:
+with open("input") as f:
     lines = f.read().splitlines()  # Getting lines without /n
     weights = [1] * len(lines)
 

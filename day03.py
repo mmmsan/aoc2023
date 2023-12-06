@@ -4,10 +4,9 @@ import math
 def solve(lines):
     total_sum = 0
     ratios = []
-    forb = (".", "\n")
     for i, line in enumerate(lines):
         for j, char in enumerate(line):
-            if not char.isdigit() and char not in forb:
+            if not char.isdigit() and char not in '.\n':
                 adj_numbers = []  # Using a list to capture adjacent numbers
                 adjacent_positions = [  # Adj positions in a square
                     (-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1),  (1, 0),  (1, 1)]
@@ -20,8 +19,7 @@ def solve(lines):
                     if bounded and lines[ni][nj].isdigit() and dy == -1:
                         readLeft(aux, ni, nj, line, lines, llen)
                         readRight(aux, ni, nj+1, line, lines, llen)
-                        if aux:
-                            adj_numbers.append(int(''.join(aux)))
+                        adj_numbers.append(int(''.join(aux)))
                     elif bounded and lines[ni][nj].isdigit() and not lines[ni][nj-1].isdigit():
                         readLeft(aux, ni, nj, line, lines, llen)
                         readRight(aux, ni, nj+1, line, lines, llen)
