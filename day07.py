@@ -23,18 +23,27 @@ def find_strength(hand: str = '23456') -> int:
 
 
 def rank_hands(hands):
-    prev_hand = []
+    prev_hand = ('', 0)
     for hand in hands:
-        if hand[1] == prev_hand:
-            tie_break(hand[0], prev_hand[0])
+        if hand[1] == prev_hand[1]:
+            hand1, hand2 = tie_break(hand, prev_hand)
+            hands.remove(hand)
+            hands.remove(hand2)
+            hands.append(hand1)
+            hands.append(hand2)
         else:
-            prev_hand = hand[1]
+            prev_hand = hand
+    return hands
 
 
 def tie_break(hand1, hand2):
-    print(hand1)
-    print(hand2)
-
+    if find_strength(hand1) > find_strength(hand2):
+        breakpoint()
+        hand2 = (hand2[0], int(hand2[1]) - 0.5)
+        return hand1, hand2
+    else:
+        hand1 = (hand1[0], int(hand1[1]) - 0.5)
+        return hand1, hand2
 
 
 with open('input', 'r') as f:
@@ -54,8 +63,9 @@ powers = []
 for hand in hands:
     powers.append(find_strength(hand))
 
-hands_powers = sorted(zip(hands, powers))
-rank_hands(hands_powers)
+hands = sorted(zip(hands, powers))
+hands = rank_hands(hands)
+print(sorted(hands, key=lambda x: x[1]))
 
 
 
